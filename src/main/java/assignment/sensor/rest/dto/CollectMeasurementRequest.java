@@ -6,7 +6,7 @@ import java.time.ZonedDateTime;
 
 @Data
 public class CollectMeasurementRequest {
-    private Double co2;
+    private Integer co2;
     private ZonedDateTime time;
 
 }

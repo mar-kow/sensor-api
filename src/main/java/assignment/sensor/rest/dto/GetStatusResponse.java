@@ -4,11 +4,5 @@ import lombok.Data;
 
 @Data
 public class GetStatusResponse {
-    private final Status status;
-
-    public enum Status {
-        OK,
-        WARN,
-        ALERT
-    }
+    private final String status;
 }

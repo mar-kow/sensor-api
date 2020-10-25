@@ -2,10 +2,8 @@ package assignment.sensor.metrics;
 
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.time.ZoneOffset;
-import java.time.ZonedDateTime;
-
+import static assignment.sensor.TestUtils.date;
+import static assignment.sensor.TestUtils.time;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class RunningWindowSensorMetricsTest {
@@ -84,14 +82,5 @@ class RunningWindowSensorMetricsTest {
         assertThat(runningWindowSensorMetrics.maxMeasurement()).isEqualTo(3_000);
         assertThat(runningWindowSensorMetrics.averageMeasurement()).isEqualTo(2166);
     }
-
-    private ZonedDateTime time(int year, int month, int dayOfMonth, int hour, int minute, int second) {
-        return ZonedDateTime.of(year, month, dayOfMonth, hour, minute, second, 0, ZoneOffset.UTC);
-    }
-
-    private LocalDate date(int year, int month, int dayOfMonth) {
-        return LocalDate.of(year, month, dayOfMonth);
-    }
-
 
 }
