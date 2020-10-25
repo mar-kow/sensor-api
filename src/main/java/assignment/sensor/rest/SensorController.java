@@ -43,7 +43,7 @@ public class SensorController {
 
     @GetMapping(value = "{uuid}/alerts", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<AlertDto> listAlerts(@PathVariable("uuid") String uuid) {
-        return sensorService.listAlerts(uuid)
+        return sensorService.listAlertsFor(uuid)
                             .stream()
                             .map(this::asDto)
                             .collect(Collectors.toList());

@@ -101,7 +101,7 @@ class SensorControllerTest {
 
     @Test
     public void shouldListAlerts() throws Exception {
-        when(sensorService.listAlerts(any())).thenReturn(List.of(alert()));
+        when(sensorService.listAlertsFor(any())).thenReturn(List.of(alert()));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/sensors/{uuid}/alerts", "4af96470-aebc-4c32-a1f7-da450a2d0bf8")
                                               .accept(MediaType.APPLICATION_JSON))
@@ -114,18 +114,18 @@ class SensorControllerTest {
                .andExpect(jsonPath("$[0].measurement2", is(2_001)))
                .andExpect(jsonPath("$[0].measurement3", is(2_002)));
 
-        verify(sensorService).listAlerts(eq("4af96470-aebc-4c32-a1f7-da450a2d0bf8"));
+        verify(sensorService).listAlertsFor(eq("4af96470-aebc-4c32-a1f7-da450a2d0bf8"));
     }
 
     @Test
     public void shouldReturnNotFoundWhileListingAlertsForNonExistingSensor() throws Exception {
-        when(sensorService.listAlerts(any())).thenThrow(new SensorNotFoundException("4af96470-aebc-4c32-a1f7-da450a2d0bf8"));
+        when(sensorService.listAlertsFor(any())).thenThrow(new SensorNotFoundException("4af96470-aebc-4c32-a1f7-da450a2d0bf8"));
 
         mockMvc.perform(MockMvcRequestBuilders.get("/api/v1/sensors/{uuid}/alerts", "4af96470-aebc-4c32-a1f7-da450a2d0bf8")
                                               .accept(MediaType.APPLICATION_JSON))
                .andExpect(status().isNotFound());
 
-        verify(sensorService).listAlerts(eq("4af96470-aebc-4c32-a1f7-da450a2d0bf8"));
+        verify(sensorService).listAlertsFor(eq("4af96470-aebc-4c32-a1f7-da450a2d0bf8"));
     }
 
     private Alert alert() {

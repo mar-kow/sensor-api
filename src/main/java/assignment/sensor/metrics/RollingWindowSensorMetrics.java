@@ -19,11 +19,11 @@ import java.util.stream.Collectors;
  * When number of measurements for each day is similar, estimation error for average measurement stays low.
  */
 @NotThreadSafe
-public class RunningWindowSensorMetrics implements SensorMetrics {
+public class RollingWindowSensorMetrics implements SensorMetrics {
 
     private final EvictingQueue<Entry> dailyMetricsRingBuffer;
 
-    public RunningWindowSensorMetrics(int numberOfDays) {
+    public RollingWindowSensorMetrics(int numberOfDays) {
         this.dailyMetricsRingBuffer = EvictingQueue.create(numberOfDays);
     }
 

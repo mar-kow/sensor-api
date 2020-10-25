@@ -2,7 +2,7 @@ package assignment.sensor;
 
 import assignment.sensor.alert.AlertListener;
 import assignment.sensor.metrics.CalculatedSensorMetrics;
-import assignment.sensor.metrics.RunningWindowSensorMetrics;
+import assignment.sensor.metrics.RollingWindowSensorMetrics;
 import assignment.sensor.metrics.SensorMetrics;
 import assignment.sensor.alert.Alert;
 import assignment.sensor.status.SensorStatusPolicy;
@@ -15,17 +15,18 @@ import java.util.Collections;
 import java.util.List;
 
 public class Sensor {
-    private final SensorStatusPolicy sensorStatusPolicy;
-    private final RunningWindowSensorMetrics sensorMetrics;
     private final List<Alert> alerts = new ArrayList<>();
+    private final AlertListener alertListener = new SensorAlertListener();
+    private final SensorStatusPolicy sensorStatusPolicy;
+    private final RollingWindowSensorMetrics sensorMetrics;
 
     public Sensor() {
-        this.sensorStatusPolicy = new SensorStatusPolicy(new SensorAlertListener());
-        this.sensorMetrics = new RunningWindowSensorMetrics(30);
+        this.sensorStatusPolicy = new SensorStatusPolicy(alertListener);
+        this.sensorMetrics = new RollingWindowSensorMetrics(30);
     }
 
     @VisibleForTesting
-    Sensor(SensorStatusPolicy sensorStatusPolicy, RunningWindowSensorMetrics sensorMetrics) {
+    Sensor(SensorStatusPolicy sensorStatusPolicy, RollingWindowSensorMetrics sensorMetrics) {
         this.sensorStatusPolicy = sensorStatusPolicy;
         this.sensorMetrics = sensorMetrics;
     }
@@ -65,6 +66,11 @@ public class Sensor {
             lastAlert.setEndTime(endTime);
         }
 
+    }
+
+    @VisibleForTesting
+    AlertListener alertListener() {
+        return alertListener;
     }
 
 }
