@@ -7,7 +7,7 @@ import assignment.sensor.rest.dto.AlertDto;
 import assignment.sensor.rest.dto.CollectMeasurementRequest;
 import assignment.sensor.rest.dto.GetMetricsResponse;
 import assignment.sensor.rest.dto.GetStatusResponse;
-import assignment.sensor.state.SensorStatus;
+import assignment.sensor.status.SensorStatus;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;

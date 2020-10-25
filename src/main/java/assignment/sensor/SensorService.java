@@ -2,7 +2,7 @@ package assignment.sensor;
 
 import assignment.sensor.metrics.SensorMetrics;
 import assignment.sensor.alert.Alert;
-import assignment.sensor.state.SensorStatus;
+import assignment.sensor.status.SensorStatus;
 import org.springframework.stereotype.Service;
 
 import java.time.ZonedDateTime;

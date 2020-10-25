@@ -1,4 +1,4 @@
-package assignment.sensor.state;
+package assignment.sensor.status;
 
 public enum SensorStatus {
     OK,

@@ -4,7 +4,7 @@ import assignment.sensor.SensorNotFoundException;
 import assignment.sensor.SensorService;
 import assignment.sensor.alert.Alert;
 import assignment.sensor.metrics.CalculatedSensorMetrics;
-import assignment.sensor.state.SensorStatus;
+import assignment.sensor.status.SensorStatus;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;

@@ -1,4 +1,4 @@
-package assignment.sensor.state;
+package assignment.sensor.status;
 
 import assignment.sensor.alert.AlertListener;
 import com.google.common.annotations.VisibleForTesting;
@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @NotThreadSafe
-public class SensorState {
+public class SensorStatusPolicy {
 
     private static final Integer THRESHOLD = 2_000;
     private static final int MEASUREMENT_BUFFER_SIZE = 3;
@@ -19,7 +19,7 @@ public class SensorState {
     private final AlertListener alertListener;
     private SensorStatus status = SensorStatus.OK;
 
-    public SensorState(AlertListener alertListener) {
+    public SensorStatusPolicy(AlertListener alertListener) {
         this.alertListener = alertListener;
     }
 

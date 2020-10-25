@@ -5,8 +5,8 @@ import assignment.sensor.metrics.CalculatedSensorMetrics;
 import assignment.sensor.metrics.RunningWindowSensorMetrics;
 import assignment.sensor.metrics.SensorMetrics;
 import assignment.sensor.alert.Alert;
-import assignment.sensor.state.SensorState;
-import assignment.sensor.state.SensorStatus;
+import assignment.sensor.status.SensorStatusPolicy;
+import assignment.sensor.status.SensorStatus;
 import com.google.common.annotations.VisibleForTesting;
 
 import java.time.ZonedDateTime;
@@ -15,28 +15,28 @@ import java.util.Collections;
 import java.util.List;
 
 public class Sensor {
-    private final SensorState sensorState;
+    private final SensorStatusPolicy sensorStatusPolicy;
     private final RunningWindowSensorMetrics sensorMetrics;
     private final List<Alert> alerts = new ArrayList<>();
 
     public Sensor() {
-        this.sensorState = new SensorState(new SensorAlertListener());
+        this.sensorStatusPolicy = new SensorStatusPolicy(new SensorAlertListener());
         this.sensorMetrics = new RunningWindowSensorMetrics(30);
     }
 
     @VisibleForTesting
-    Sensor(SensorState sensorState, RunningWindowSensorMetrics sensorMetrics) {
-        this.sensorState = sensorState;
+    Sensor(SensorStatusPolicy sensorStatusPolicy, RunningWindowSensorMetrics sensorMetrics) {
+        this.sensorStatusPolicy = sensorStatusPolicy;
         this.sensorMetrics = sensorMetrics;
     }
 
     public synchronized void addMeasurement(ZonedDateTime time, Integer measurement) {
-        sensorState.addMeasurement(time, measurement);
+        sensorStatusPolicy.addMeasurement(time, measurement);
         sensorMetrics.addMeasurement(time, measurement);
     }
 
     public SensorStatus status() {
-        return sensorState.status();
+        return sensorStatusPolicy.status();
     }
 
     public SensorMetrics metrics() {
